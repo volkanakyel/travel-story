@@ -15,7 +15,7 @@
         class="text-gray-400 hover:text-gray-600 md:hidden"
         @click="$emit('toggle')"
       >
-        <XIcon size="20" />
+        <XIcon :size="20" />
       </button>
     </div>
 
@@ -23,12 +23,12 @@
       <div class="space-y-1">
         <button class="flex items-center w-full px-4 py-2.5 text-blue-600 bg-blue-50 rounded-lg">
           <UserCircle
-            size="20"
+            :size="20"
             class="mr-3 flex-shrink-0"
           />
           <span class="truncate">Volkan Uikielle</span>
           <ChevronRight
-            size="16"
+            :size="16"
             class="ml-auto flex-shrink-0"
           />
         </button>
@@ -40,7 +40,7 @@
           @click="$emit('create-trip')"
         >
           <PlusCircle
-            size="20"
+            :size="20"
             class="mr-3 flex-shrink-0"
           />
           <span>Create trip</span>
@@ -50,12 +50,12 @@
       <div class="mt-6">
         <div class="flex items-center px-4 py-2.5">
           <MapPin
-            size="20"
+            :size="20"
             class="mr-3 text-gray-400 flex-shrink-0"
           />
           <span class="text-gray-900 font-medium">Trips</span>
           <ChevronDown
-            size="16"
+            :size="16"
             class="ml-auto text-gray-400 flex-shrink-0"
           />
         </div>
@@ -77,7 +77,7 @@
           class="flex items-center w-full px-4 py-2.5 text-gray-700 hover:text-gray-900 rounded-lg hover:bg-gray-50"
         >
           <CreditCard
-            size="20"
+            :size="20"
             class="mr-3 text-gray-400 flex-shrink-0"
           />
           <span>Subscription</span>
@@ -86,7 +86,7 @@
           class="flex items-center w-full px-4 py-2.5 text-gray-700 hover:text-gray-900 rounded-lg hover:bg-gray-50"
         >
           <LifeBuoy
-            size="20"
+            :size="20"
             class="mr-3 text-gray-400 flex-shrink-0"
           />
           <span>Support</span>
@@ -95,7 +95,7 @@
           class="flex items-center w-full px-4 py-2.5 text-gray-700 hover:text-gray-900 rounded-lg hover:bg-gray-50"
         >
           <Smartphone
-            size="20"
+            :size="20"
             class="mr-3 text-gray-400 flex-shrink-0"
           />
           <span>Mobile App</span>
