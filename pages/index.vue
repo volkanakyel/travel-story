@@ -78,7 +78,7 @@
               <div class="bg-gray-50 rounded-xl p-4 text-center">
                 <div class="flex items-center justify-center mb-3">
                   <Plane
-                    size="20"
+                    :size="20"
                     class="text-gray-400"
                   />
                 </div>
@@ -88,7 +88,7 @@
               <div class="bg-gray-50 rounded-xl p-4 text-center">
                 <div class="flex items-center justify-center mb-3">
                   <Calendar
-                    size="20"
+                    :size="20"
                     class="text-gray-400"
                   />
                 </div>
@@ -98,7 +98,7 @@
               <div class="bg-gray-50 rounded-xl p-4 text-center">
                 <div class="flex items-center justify-center mb-3">
                   <PlaneTakeoff
-                    size="20"
+                    :size="20"
                     class="text-gray-400"
                   />
                 </div>
@@ -108,7 +108,7 @@
               <div class="bg-gray-50 rounded-xl p-4 text-center">
                 <div class="flex items-center justify-center mb-3">
                   <Flag
-                    size="20"
+                    :size="20"
                     class="text-gray-400"
                   />
                 </div>
@@ -118,7 +118,7 @@
               <div class="bg-gray-50 rounded-xl p-4 text-center">
                 <div class="flex items-center justify-center mb-3">
                   <Building2
-                    size="20"
+                    :size="20"
                     class="text-gray-400"
                   />
                 </div>
@@ -156,7 +156,7 @@
                 <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
                   <div class="flex items-center gap-3">
                     <Instagram
-                      size="20"
+                      :size="20"
                       class="text-gray-400"
                     />
                     <span class="text-gray-700">Instagram</span>
@@ -166,7 +166,7 @@
                 <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
                   <div class="flex items-center gap-3">
                     <Twitter
-                      size="20"
+                      :size="20"
                       class="text-gray-400"
                     />
                     <span class="text-gray-700">X</span>
@@ -176,7 +176,7 @@
                 <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
                   <div class="flex items-center gap-3">
                     <Send
-                      size="20"
+                      :size="20"
                       class="text-gray-400"
                     />
                     <span class="text-gray-700">Telegram</span>
@@ -200,19 +200,19 @@
     <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
       <div class="flex justify-around px-4 py-3">
         <button class="flex flex-col items-center text-gray-400 hover:text-blue-600">
-          <Home size="24" />
+          <Home :size="24" />
           <span class="text-xs mt-1">Home</span>
         </button>
         <button class="flex flex-col items-center text-gray-400 hover:text-blue-600">
-          <MapPin size="24" />
+          <MapPin :size="24" />
           <span class="text-xs mt-1">Trips</span>
         </button>
         <button class="flex flex-col items-center text-blue-600">
-          <UserCircle size="24" />
+          <UserCircle :size="24" />
           <span class="text-xs mt-1">Profile</span>
         </button>
         <button class="flex flex-col items-center text-gray-400 hover:text-blue-600">
-          <Settings size="24" />
+          <Settings :size="24" />
           <span class="text-xs mt-1">Settings</span>
         </button>
       </div>
@@ -223,31 +223,21 @@
 <script setup lang="ts">
 import {
   AlertCircle,
-  BellIcon,
   Building2,
   Calendar,
   CheckCircle2,
-  ChevronDown,
-  ChevronRight,
-  CreditCard,
-  DollarSign,
   Flag,
   Home,
   Info,
   Instagram,
-  LifeBuoy,
   MapPin,
   Menu,
   Plane,
   PlaneTakeoff,
-  PlusCircle,
   Send,
   Settings,
-  Smartphone,
   Twitter,
   UserCircle,
-  Users,
-  XIcon,
 } from 'lucide-vue-next'
 import { onUnmounted, ref, watch } from 'vue'
 
@@ -367,7 +357,7 @@ const notificationsRef = ref<HTMLElement | null>(null)
 const notifications = ref([
   {
     id: '1',
-    type: 'success',
+    type: 'success' as const,
     title: 'Flight Confirmed',
     message: 'Your flight to London has been confirmed',
     icon: CheckCircle2,
@@ -376,7 +366,7 @@ const notifications = ref([
   },
   {
     id: '2',
-    type: 'warning',
+    type: 'warning' as const,
     title: 'Check-in Reminder',
     message: 'Check-in for your flight opens in 24 hours',
     icon: AlertCircle,
@@ -385,7 +375,7 @@ const notifications = ref([
   },
   {
     id: '3',
-    type: 'info',
+    type: 'info' as const,
     title: 'Hotel Update',
     message: 'Your hotel booking has been upgraded',
     icon: Info,
@@ -394,7 +384,7 @@ const notifications = ref([
   },
   {
     id: '4',
-    type: 'success',
+    type: 'success' as const,
     title: 'Trip Created',
     message: 'New trip to Paris has been created',
     icon: CheckCircle2,
@@ -471,10 +461,6 @@ const shareTrip = () => {
     navigator.clipboard.writeText(text)
     alert('Trip details copied to clipboard!')
   }
-}
-
-const toggleNotifications = () => {
-  isNotificationsOpen.value = !isNotificationsOpen.value
 }
 
 const markAsRead = (id: string) => {
