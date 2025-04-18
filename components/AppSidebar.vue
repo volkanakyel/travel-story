@@ -48,7 +48,10 @@
       </div>
 
       <div class="mt-6">
-        <div class="flex items-center px-4 py-2.5">
+        <button
+          class="flex items-center w-full px-4 py-2.5"
+          @click="isTripsOpen = !isTripsOpen"
+        >
           <MapPin
             :size="20"
             class="mr-3 text-gray-400 flex-shrink-0"
@@ -56,20 +59,33 @@
           <span class="text-gray-900 font-medium">Trips</span>
           <ChevronDown
             :size="16"
-            class="ml-auto text-gray-400 flex-shrink-0"
+            class="ml-auto text-gray-400 flex-shrink-0 transition-transform duration-200"
+            :class="{ 'rotate-180': isTripsOpen }"
           />
-        </div>
-        <div class="ml-9 mt-2 space-y-1">
-          <a
-            v-for="trip in trips"
-            :key="trip.id"
-            href="#"
-            class="block px-4 py-2 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-50"
-            @click.prevent="$emit('select-trip', trip)"
+        </button>
+        <Transition
+          enter-active-class="transition duration-200 ease-out"
+          enter-from-class="opacity-0 -translate-y-1"
+          enter-to-class="opacity-100 translate-y-0"
+          leave-active-class="transition duration-150 ease-in"
+          leave-from-class="opacity-100 translate-y-0"
+          leave-to-class="opacity-0 -translate-y-1"
+        >
+          <div
+            v-if="isTripsOpen"
+            class="ml-9 mt-2 space-y-1"
           >
-            {{ trip.name }}
-          </a>
-        </div>
+            <a
+              v-for="trip in trips"
+              :key="trip.id"
+              href="#"
+              class="block px-4 py-2 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-50"
+              @click.prevent="$emit('select-trip', trip)"
+            >
+              {{ trip.name }}
+            </a>
+          </div>
+        </Transition>
       </div>
 
       <div class="mt-6 space-y-1">
@@ -170,13 +186,15 @@ interface Trip {
   tags: string[]
 }
 
-defineProps<{
+const props = defineProps<{
   isOpen: boolean
   trips: Trip[]
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'toggle' | 'create-trip'): void
   (e: 'select-trip', trip: Trip): void
 }>()
+
+const isTripsOpen = ref(true)
 </script>
