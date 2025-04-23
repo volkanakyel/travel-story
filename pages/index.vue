@@ -1,19 +1,16 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex md:flex-row flex-col">
-    <!-- Create Trip Modal -->
     <AppTripCreationModal
       :is-open="isCreateTripModalOpen"
       @close="isCreateTripModalOpen = false"
       @create="createTrip"
     />
 
-    <!-- Trip Details Modal -->
     <AppTripDetailsModal
       :trip="selectedTrip"
       @close="selectedTrip = null"
     />
 
-    <!-- Sidebar for desktop -->
     <AppSidebar
       :is-open="isSidebarOpen"
       :trips="trips"
@@ -22,14 +19,12 @@
       @select-trip="selectTrip"
     />
 
-    <!-- Overlay for mobile -->
     <div
       v-if="isSidebarOpen"
       class="fixed inset-0 bg-gray-900/20 backdrop-blur-sm z-10 md:hidden"
       @click="toggleSidebar"
     />
 
-    <!-- Main content -->
     <main class="flex-1 min-h-screen">
       <div class="max-w-4xl mx-auto px-4 py-6 md:px-6 lg:px-8">
         <header class="flex items-center justify-between mb-8">
@@ -52,11 +47,14 @@
           <div class="p-6 md:p-8">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
               <div class="flex items-center gap-4">
-                <div class="relative">
+                <div class="relative group">
+                  <div
+                    class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full blur opacity-10 group-hover:opacity-20 transition duration-200"
+                  />
                   <img
                     :src="'/uikielle.png'"
                     alt="Profile"
-                    class="w-16 h-16 rounded-full object-cover ring-2 ring-white"
+                    class="relative w-16 h-16 rounded-full object-cover ring-2 ring-white"
                   />
                   <div
                     class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white rounded-full"
@@ -68,62 +66,100 @@
                 </div>
               </div>
               <button
-                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors group relative"
               >
-                Edit
+                <div
+                  class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-200"
+                />
+                <span class="relative">Edit Profile</span>
               </button>
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-              <div class="bg-gray-50 rounded-xl p-4 text-center">
-                <div class="flex items-center justify-center mb-3">
-                  <Plane
-                    :size="20"
-                    class="text-gray-400"
-                  />
+              <div class="group relative">
+                <div
+                  class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl blur opacity-10 group-hover:opacity-20 transition duration-200"
+                />
+                <div
+                  class="relative bg-gray-50 rounded-xl p-4 text-center hover:bg-white transition-colors"
+                >
+                  <div class="flex items-center justify-center mb-3">
+                    <Plane
+                      :size="20"
+                      class="text-blue-600"
+                    />
+                  </div>
+                  <div class="font-semibold text-xl text-gray-900">21,301</div>
+                  <div class="text-sm text-gray-500 mt-1">Miles</div>
                 </div>
-                <div class="font-semibold text-xl text-gray-900">21,301</div>
-                <div class="text-sm text-gray-500 mt-1">Miles</div>
               </div>
-              <div class="bg-gray-50 rounded-xl p-4 text-center">
-                <div class="flex items-center justify-center mb-3">
-                  <Calendar
-                    :size="20"
-                    class="text-gray-400"
-                  />
+              <div class="group relative">
+                <div
+                  class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl blur opacity-10 group-hover:opacity-20 transition duration-200"
+                />
+                <div
+                  class="relative bg-gray-50 rounded-xl p-4 text-center hover:bg-white transition-colors"
+                >
+                  <div class="flex items-center justify-center mb-3">
+                    <Calendar
+                      :size="20"
+                      class="text-blue-600"
+                    />
+                  </div>
+                  <div class="font-semibold text-xl text-gray-900">81</div>
+                  <div class="text-sm text-gray-500 mt-1">Days</div>
                 </div>
-                <div class="font-semibold text-xl text-gray-900">81</div>
-                <div class="text-sm text-gray-500 mt-1">Days</div>
               </div>
-              <div class="bg-gray-50 rounded-xl p-4 text-center">
-                <div class="flex items-center justify-center mb-3">
-                  <PlaneTakeoff
-                    :size="20"
-                    class="text-gray-400"
-                  />
+              <div class="group relative">
+                <div
+                  class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl blur opacity-10 group-hover:opacity-20 transition duration-200"
+                />
+                <div
+                  class="relative bg-gray-50 rounded-xl p-4 text-center hover:bg-white transition-colors"
+                >
+                  <div class="flex items-center justify-center mb-3">
+                    <PlaneTakeoff
+                      :size="20"
+                      class="text-blue-600"
+                    />
+                  </div>
+                  <div class="font-semibold text-xl text-gray-900">24</div>
+                  <div class="text-sm text-gray-500 mt-1">Flights</div>
                 </div>
-                <div class="font-semibold text-xl text-gray-900">24</div>
-                <div class="text-sm text-gray-500 mt-1">Flights</div>
               </div>
-              <div class="bg-gray-50 rounded-xl p-4 text-center">
-                <div class="flex items-center justify-center mb-3">
-                  <Flag
-                    :size="20"
-                    class="text-gray-400"
-                  />
+              <div class="group relative">
+                <div
+                  class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl blur opacity-10 group-hover:opacity-20 transition duration-200"
+                />
+                <div
+                  class="relative bg-gray-50 rounded-xl p-4 text-center hover:bg-white transition-colors"
+                >
+                  <div class="flex items-center justify-center mb-3">
+                    <Flag
+                      :size="20"
+                      class="text-blue-600"
+                    />
+                  </div>
+                  <div class="font-semibold text-xl text-gray-900">11</div>
+                  <div class="text-sm text-gray-500 mt-1">Countries</div>
                 </div>
-                <div class="font-semibold text-xl text-gray-900">11</div>
-                <div class="text-sm text-gray-500 mt-1">Countries</div>
               </div>
-              <div class="bg-gray-50 rounded-xl p-4 text-center">
-                <div class="flex items-center justify-center mb-3">
-                  <Building2
-                    :size="20"
-                    class="text-gray-400"
-                  />
+              <div class="group relative">
+                <div
+                  class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl blur opacity-10 group-hover:opacity-20 transition duration-200"
+                />
+                <div
+                  class="relative bg-gray-50 rounded-xl p-4 text-center hover:bg-white transition-colors"
+                >
+                  <div class="flex items-center justify-center mb-3">
+                    <Building2
+                      :size="20"
+                      class="text-blue-600"
+                    />
+                  </div>
+                  <div class="font-semibold text-xl text-gray-900">45</div>
+                  <div class="text-sm text-gray-500 mt-1">Hotels</div>
                 </div>
-                <div class="font-semibold text-xl text-gray-900">45</div>
-                <div class="text-sm text-gray-500 mt-1">Hotels</div>
               </div>
             </div>
           </div>
@@ -147,49 +183,101 @@
             </div>
 
             <div class="space-y-4">
-              <h3 class="font-medium text-gray-900">Social links</h3>
-              <p class="text-sm text-gray-500">
-                These will be visible on your profile if it's set to public
-              </p>
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="font-medium text-gray-900">Social links</h3>
+                  <p class="text-sm text-gray-500">
+                    These will be visible on your profile if it's set to public
+                  </p>
+                </div>
+                <button class="px-3 py-1.5 text-sm text-blue-600 hover:text-blue-700 font-medium">
+                  Add Link
+                </button>
+              </div>
 
-              <div class="space-y-4">
-                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
-                  <div class="flex items-center gap-3">
-                    <Instagram
-                      :size="20"
-                      class="text-gray-400"
-                    />
-                    <span class="text-gray-700">Instagram</span>
+              <div class="space-y-3">
+                <div class="group relative">
+                  <div
+                    class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl blur opacity-10 group-hover:opacity-20 transition duration-200"
+                  />
+                  <div
+                    class="relative flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-white transition-colors"
+                  >
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                        <Instagram
+                          :size="20"
+                          class="text-blue-600"
+                        />
+                      </div>
+                      <div>
+                        <span class="text-gray-900 font-medium">Instagram</span>
+                        <p class="text-sm text-gray-500">@volkanakielle</p>
+                      </div>
+                    </div>
+                    <button class="text-gray-400 hover:text-gray-600">
+                      <XIcon :size="16" />
+                    </button>
                   </div>
-                  <span class="text-gray-500">@volkanakielle</span>
                 </div>
-                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
-                  <div class="flex items-center gap-3">
-                    <Twitter
-                      :size="20"
-                      class="text-gray-400"
-                    />
-                    <span class="text-gray-700">X</span>
+                <div class="group relative">
+                  <div
+                    class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl blur opacity-10 group-hover:opacity-20 transition duration-200"
+                  />
+                  <div
+                    class="relative flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-white transition-colors"
+                  >
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                        <Twitter
+                          :size="20"
+                          class="text-blue-600"
+                        />
+                      </div>
+                      <div>
+                        <span class="text-gray-900 font-medium">X</span>
+                        <p class="text-sm text-gray-500">@uikielle</p>
+                      </div>
+                    </div>
+                    <button class="text-gray-400 hover:text-gray-600">
+                      <XIcon :size="16" />
+                    </button>
                   </div>
-                  <span class="text-gray-500">@uikielle</span>
                 </div>
-                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
-                  <div class="flex items-center gap-3">
-                    <Send
-                      :size="20"
-                      class="text-gray-400"
-                    />
-                    <span class="text-gray-700">Telegram</span>
+                <div class="group relative">
+                  <div
+                    class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl blur opacity-10 group-hover:opacity-20 transition duration-200"
+                  />
+                  <div
+                    class="relative flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-white transition-colors"
+                  >
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                        <Send
+                          :size="20"
+                          class="text-blue-600"
+                        />
+                      </div>
+                      <div>
+                        <span class="text-gray-900 font-medium">Telegram</span>
+                        <p class="text-sm text-gray-500">@volkanakielle</p>
+                      </div>
+                    </div>
+                    <button class="text-gray-400 hover:text-gray-600">
+                      <XIcon :size="16" />
+                    </button>
                   </div>
-                  <span class="text-gray-500">@volkanakielle</span>
                 </div>
               </div>
             </div>
 
             <button
-              class="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              class="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors group relative"
             >
-              Save Changes
+              <div
+                class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg blur opacity-10 group-hover:opacity-20 transition duration-200"
+              />
+              <span class="relative">Save Changes</span>
             </button>
           </div>
         </div>
@@ -238,6 +326,7 @@ import {
   Settings,
   Twitter,
   UserCircle,
+  XIcon,
 } from 'lucide-vue-next'
 import { onUnmounted, ref, watch } from 'vue'
 
@@ -281,7 +370,7 @@ const trips = ref<Trip[]>([
     startDate: '2024-05-15',
     endDate: '2024-05-20',
     budget: 1200,
-    people: ['Volkan', 'Jane'],
+    people: ['Volkan', 'Metehan'],
     bookings: {
       flights: [
         {
@@ -448,21 +537,6 @@ const selectTrip = (trip: Trip) => {
   isSidebarOpen.value = false
 }
 
-const shareTrip = () => {
-  if (navigator.share) {
-    navigator.share({
-      title: selectedTrip.value?.name,
-      text: `Check out my trip to ${selectedTrip.value?.location} from ${selectedTrip.value?.startDate} to ${selectedTrip.value?.endDate}`,
-      url: window.location.href,
-    })
-  } else {
-    // Fallback for browsers that don't support the Web Share API
-    const text = `Check out my trip to ${selectedTrip.value?.location} from ${selectedTrip.value?.startDate} to ${selectedTrip.value?.endDate}`
-    navigator.clipboard.writeText(text)
-    alert('Trip details copied to clipboard!')
-  }
-}
-
 const markAsRead = (id: string) => {
   const notification = notifications.value.find(n => n.id === id)
   if (notification) {
@@ -470,14 +544,12 @@ const markAsRead = (id: string) => {
   }
 }
 
-// Add click outside handler
 const handleClickOutside = (event: MouseEvent) => {
   if (notificationsRef.value && !notificationsRef.value.contains(event.target as Node)) {
     isNotificationsOpen.value = false
   }
 }
 
-// Add and remove event listener when dropdown opens/closes
 watch(isNotificationsOpen, isOpen => {
   if (isOpen) {
     document.addEventListener('click', handleClickOutside)
@@ -486,42 +558,35 @@ watch(isNotificationsOpen, isOpen => {
   }
 })
 
-// Clean up event listener when component is unmounted
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
 })
 </script>
 
-<style>
-/* Smooth scrolling */
+<style></style>
 html {
   scroll-behavior: smooth;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
 .overflow-y-auto::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 .overflow-y-auto {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
 
-/* Add smooth transitions for all components */
 .transition {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
 }
 
-/* Add backdrop blur transition */
 .backdrop-blur-sm {
   transition: backdrop-filter 0.2s ease;
 }
 
-/* Add transform transition */
 .translate-y-1 {
   transform: translateY(0.25rem);
 }
