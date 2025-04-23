@@ -563,7 +563,7 @@ onUnmounted(() => {
 })
 </script>
 
-<style></style>
+<style>
 html {
   scroll-behavior: smooth;
 }
