@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="fixed md:static inset-y-0 left-0 z-20 flex flex-col w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out"
+    class="fixed md:static inset-y-0 left-0 z-20 flex flex-col w-64 bg-white transform transition-transform duration-300 ease-in-out"
     :class="{
       'translate-x-0': isOpen,
       '-translate-x-full md:translate-x-0': !isOpen,
@@ -19,35 +19,33 @@
       </button>
     </div>
 
-    <nav class="flex-1 px-6 pb-6 overflow-y-auto">
-      <div class="space-y-1">
-        <button class="flex items-center w-full px-4 py-2.5 text-blue-600 bg-blue-50 rounded-lg">
-          <UserCircle
-            :size="20"
-            class="mr-3 flex-shrink-0"
-          />
-          <span class="truncate">Volkan Uikielle</span>
-          <ChevronRight
-            :size="16"
-            class="ml-auto flex-shrink-0"
-          />
-        </button>
-      </div>
-
-      <div class="mt-8">
-        <button
-          class="flex items-center w-full px-4 py-2.5 text-blue-600 font-medium rounded-lg hover:bg-blue-50"
-          @click="$emit('create-trip')"
-        >
-          <PlusCircle
-            :size="20"
-            class="mr-3 flex-shrink-0"
-          />
-          <span>Create trip</span>
-        </button>
-      </div>
-
+    <nav class="flex flex-col justify-between h-full px-6 pb-6 overflow-y-auto">
       <div class="mt-6">
+        <div class="space-y-1">
+          <button class="flex items-center w-full px-4 py-2.5 text-blue-600 bg-blue-50 rounded-lg">
+            <UserCircle
+              :size="20"
+              class="mr-3 flex-shrink-0"
+            />
+            <span class="truncate">Volkan Uikielle</span>
+            <ChevronRight
+              :size="16"
+              class="ml-auto flex-shrink-0"
+            />
+          </button>
+        </div>
+        <div>
+          <button
+            class="flex items-center w-full px-4 py-2.5 text-blue-600 font-medium rounded-lg hover:bg-blue-50"
+            @click="$emit('create-trip')"
+          >
+            <PlusCircle
+              :size="20"
+              class="mr-3 flex-shrink-0"
+            />
+            <span>Create trip</span>
+          </button>
+        </div>
         <button
           class="flex items-center w-full px-4 py-2.5"
           @click="isTripsOpen = !isTripsOpen"
@@ -186,12 +184,12 @@ interface Trip {
   tags: string[]
 }
 
-const props = defineProps<{
+defineProps<{
   isOpen: boolean
   trips: Trip[]
 }>()
 
-const emit = defineEmits<{
+defineEmits<{
   (e: 'toggle' | 'create-trip'): void
   (e: 'select-trip', trip: Trip): void
 }>()
