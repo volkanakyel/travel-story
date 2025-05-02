@@ -37,7 +37,6 @@
           </div>
 
           <div class="flex-1 overflow-y-auto p-6 space-y-8">
-            <!-- Trip Status and Date Info -->
             <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2">
@@ -55,7 +54,6 @@
               </div>
             </div>
 
-            <!-- Location and Budget -->
             <div class="grid grid-cols-2 gap-4">
               <div class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
                 <MapPin
@@ -73,7 +71,6 @@
               </div>
             </div>
 
-            <!-- Travelers -->
             <div>
               <h3 class="text-lg font-medium text-gray-900 mb-3">Travelers</h3>
               <div class="flex flex-wrap gap-3">
@@ -90,7 +87,6 @@
               </div>
             </div>
 
-            <!-- Flights -->
             <div v-if="trip.bookings.flights.length > 0">
               <h3 class="text-lg font-medium text-gray-900 mb-3">Flights</h3>
               <div class="space-y-3">
@@ -120,7 +116,6 @@
               </div>
             </div>
 
-            <!-- Hotels -->
             <div v-if="trip.bookings.hotels.length > 0">
               <h3 class="text-lg font-medium text-gray-900 mb-3">Hotels</h3>
               <div class="space-y-3">
@@ -149,7 +144,6 @@
               </div>
             </div>
 
-            <!-- Tags -->
             <div v-if="trip.tags.length > 0">
               <h3 class="text-lg font-medium text-gray-900 mb-3">Tags</h3>
               <div class="flex flex-wrap gap-2">
@@ -171,7 +165,6 @@
               </div>
             </div>
 
-            <!-- Share Section -->
             <div class="border-t border-gray-100 pt-6">
               <h3 class="text-lg font-medium text-gray-900 mb-4">Share Trip</h3>
               <div class="flex flex-col items-center gap-4">
