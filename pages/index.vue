@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50 flex md:flex-row flex-col">
+  <div class="min-h-screen flex md:flex-row flex-col">
     <AppTripCreationModal
       :is-open="isCreateTripModalOpen"
       @close="isCreateTripModalOpen = false"
@@ -25,8 +25,8 @@
       @click="toggleSidebar"
     />
 
-    <main class="flex-1 min-h-screen">
-      <div class="max-w-4xl mx-auto px-4 py-6 md:px-6 lg:px-8">
+    <main class="flex-1 min-h-screen p-8">
+      <div class="max-w-full mx-auto px-4 py-6 md:px-6 lg:px-8 bg-gray-50 rounded-2xl p-8">
         <header class="flex items-center justify-between mb-8">
           <div class="flex items-center gap-4">
             <button
